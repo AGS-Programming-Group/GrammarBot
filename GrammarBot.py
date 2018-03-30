@@ -8,14 +8,17 @@ from sys import exit as sys_exit
 from os import startfile
 
 # Import internal dependencies
-from src import talk
+from src import talk, cli
 
 # Constants
 CONFIG = "./data/config.yaml"
 PERMS = 3136
 
+# Get arguments form the command line
+args = cli.parse()
+
 # Sets up the logging system
-logging.basicConfig(level=logging.ERROR)
+logging.basicConfig(level=logging.INFO if args.info else logging.ERROR)
 log = logging.getLogger()
 
 # Get setup information from config
@@ -73,6 +76,6 @@ async def on_message(message):
 
 
 # Run the bot
-client.run(token)
+client.run(args.token if (args.token is not None) else token)
 # End the bot
 sys_exit()
