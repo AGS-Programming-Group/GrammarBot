@@ -64,6 +64,8 @@ async def on_message(message):
         await client.send_message(ch, "Pong!")
     elif msg.startswith("!read"):
         await client.send_message(ch, talk.reading())
+    elif msg.startswith("!eval"):
+        await client.send_message(ch, talk.eval(message.content[5:]))
     elif msg.startswith("!quit"):
         if message.author.id == owner_id:
             print("Exit command called from Discord. Exiting.")
